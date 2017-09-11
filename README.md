@@ -49,7 +49,7 @@ npm install express --save
 
 # 二、软件框图
 该项目运用B/S架构，服务器端 (S) 是ROV上的主控板，上面运行服务程序，并打开一个端口为局域网下的其他用户打开服务入口；浏览器端 (B) 是与ROV同一局域网段下其他设备（PC  / 手机 / 平板电脑）上的浏览器，在浏览器中输入服务器端的网址与端口即可访问该服务。软件框图如下所示：
-![](./Pictures/ROV Control Frame.png)
+![](./Pictures/ROV-Control-Frame.png)
 注：目前除了Xbox控制器，其余部分都已经测试完毕，可以实现各部分之间的连接。
 
 # 三、目录结构
@@ -133,7 +133,7 @@ make
 	- -p：若使用 http 形式输出，则 -p 参数给出 mjpg-streamer 的服务端口号；
 
 - 其中 –p 后连接的数字是 mjpg-streamer 服务的端口号，执行后即可在浏览器中输入运行 mjpg-streamer 的主机 IP 与端口号即可。举例：若运行 mjpg-streamer 的主机是10.129.48.230，运行 mjpg-streamer 的端口是 8080 ，则在浏览器中输入网址 http://10.129.48.230:8080，即可看到如下的页面：
-![](./Pictures/mjpg-streamer Web page.jpg)
+![](./Pictures/mjpg-streamer-Web-page.jpg)
 
 以上即为 mjpg-streamer 的常规启动方式。但实际运用中并不需要这样启动 mjpg-streaer，笔者通过 spawn 模块的功能，实现了在服务器端程序中直接运行 mjpg-streamer 的功能。具体实现可以见源码。
 
