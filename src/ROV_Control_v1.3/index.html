@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My ROV's Index</title>
+    <link type="text/css" href="./src/jquery.jscrollpane.css" rel="stylesheet" media="all" />
+
+    <style type="text/css">
+        div#container {width:1000px;}
+        div#header {background-color: #99bbbb; width: 1000px;}
+        div#camera {background-color: yellow; height: 500px; width: 650px; float: left;}
+        div#content {background-color: white; height: 500px; width: 350px; float: left;}
+    </style>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="./src/socket.io.js"></script>
+    <script type="text/javascript" src="./src/jquery-1.11.1.js"></script>
+    <script type="text/javascript">
+
+        // 连接服务器端
+        // 注： http:// 后面是运行服务器的主机 IP 与端口号
+        var socket = io.connect('http://10.129.48.230:3000');
+        /*=====================================================
+         * 函数：SendCMD
+         *
+         * 功能：Send 按键响应函数，将 cmd-text 控件中的数据发送给服务器端；
+         *
+         * 注：该函数只是为了测试服务器与客户端之间的连接情况；以后实际运
+         *  用中，还需要根据定下的协议写具体的解析数据事件以及对应的回调函数；
+         *=====================================================
+         */
+        function SendCMD() {
+            var cmdtext = document.getElementById("cmd-text");
+            var cmd = cmdtext.value;
+            console.log("Cmd Data: " + cmd);
+            socket.emit('client-send', cmd);
+        }
+
+        /*=====================================================
+         * 事件：server-send
+         *
+         * 所有者类型：socket.io
+         *
+         * 功能：当该串口成功接收服务器发送数据的事件，则执行后面的回调函数；
+         *      该处回调函数只是为了简单的测试接收服务器传输数据的功能，
+         *  所以只是将收到的数据显示在 HTML 网页的控件中。
+         *=====================================================
+         */
+        socket.on('server-send', function (info) {
+            var infotext = document.getElementById("info-text");
+            infotext.value = info;
+        })
+    </script>
+
+
+
+</head>
+
+<body>
+<div id="container">
+    <div id="header">
+        <h1>
+            <center>My ROV's Index</center>
+        </h1>
+    </div>
+
+    <div id="camera">
+        <center>
+            <img src="http://10.129.48.230:3031/?action=stream">
+        </center>
+    </div>
+
+    <div id="content">
+        <form id="CmdForm" name="Cmd">
+            Send Command:
+            <input type="text" id="cmd-text" name="cmd-text">
+            <input type="button" id="cmd-button" onclick="SendCMD()" value="Send">
+        </form>
+        <hr>
+        <form id="InfoForm" name="Info">
+            Recv Info:
+            <input type="text" id="info-text" name="info-text">
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>

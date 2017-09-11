@@ -1,0 +1,19 @@
+{
+  "name": "myapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "events": "^1.1.1",
+    "express": "^4.15.4",
+    "path": "^0.12.7",
+    "serialport": "^5.0.0",
+    "socket.io": "^2.0.3"
+  }
+}
